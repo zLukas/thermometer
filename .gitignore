@@ -1,0 +1,8 @@
+!.gitignore
+
+/Dave
+/Debug
+/Startup
+/.settings
+/Libraries
+*.ld
