@@ -7,17 +7,12 @@
 
 #ifndef OLED_OLED_H_
 #define OLED_OLED_H_
-
+#include <stdio.h>
+#include "defines.h"
 #include "SSD1306.h"
-#include "digital_io_pins.h"
+#include "i2c.h"
 
-#define uint16 uint16_t
-#define uint8	uint8_t
-
-typedef struct{
-	void (*i2c_send)(uint16, uint8);
-	void(*set_oled_pin)(oled_pins, pin_states);
-}application_layer;
-
-
+void oled_init(void);
+void oled_demo(void);
+void oled_write_lines(char* data);
 #endif /* OLED_OLED_H_ */

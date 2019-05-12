@@ -6,8 +6,7 @@
  */
 #include "i2c.h"
 
-
-void i2c_init(void){
-
-}
-
+application_layer hardware ={
+	.i2c_init = usic_i2c_init,
+	.i2c_send = usic_i2c_transmit_byte
+};

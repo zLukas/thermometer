@@ -8,7 +8,7 @@
 
 
 
-#include <DAVE.h>                 //Declarations from DAVE Code Generation (includes SFR declaration)
+#include "main.h"                //Declarations from DAVE Code Generation (includes SFR declaration)
 
 /**
 
@@ -20,11 +20,13 @@
  * code.
  */
 
+
 int main(void)
 {
-
-
-
+	/* init all peripherials */
+	DAVE_Init();
+	oled_init();
+	oled_demo();
   /* Placeholder for user application code. The while loop below can be replaced with user application code. */
   while(1U)
   {

@@ -10,13 +10,13 @@
 
 #include "usic_i2c.h"
 #include "defines.h"
-
+#define NO_COMMAND	0xFF
 
 typedef struct{
 	void (*i2c_init)(void);
-	void (*i2c_send)(uint8, uint8*, uint8);
-	void (*i2c_receive)(uint8, uint8*, uint8);
-}i2c_hardware_functions;
+	void (*i2c_send)(uint8,uint8 ,uint8);
+	void (*i2c_receive)(uint16, uint8);
+}application_layer;
 
 
 #endif /* COMMUNICATION_I2C_H_ */

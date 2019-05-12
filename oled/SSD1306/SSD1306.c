@@ -24,11 +24,14 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
+#define OLED_ADDR	   0x78
 #define SSD1306_CMD    0
 #define SSD1306_DAT    1
 
-#define SSD1306_WIDTH    128
-#define SSD1306_HEIGHT   64
+#define SSD1306_WIDTH  128
+#define SSD1306_HEIGHT 64
+#define SSD1306_CMD_REGISTER  	0x00
+#define SSD1306_DATA_REGISTER	0x40
 
 
 /* Private macro -------------------------------------------------------------*/
@@ -53,9 +56,15 @@ static uint8_t s_chDispalyBuffer[128][8];
   *                           1: Writes to the display data ram
   * @retval None
 **/
+
+extern application_layer hardware;
 static void ssd1306_write_byte(uint8_t chData, uint8_t chCmd) 
 {
-
+	if (chCmd == SSD1306_DAT){
+		hardware.i2c_send(OLED_ADDR,SSD1306_DATA_REGISTER, chData);
+	}else{
+		hardware.i2c_send(OLED_ADDR,SSD1306_CMD_REGISTER, chData);
+	}
 /*
 	iic_start();
 	iic_write_byte(0x78);
@@ -364,6 +373,7 @@ void ssd1306_draw_bitmap(uint8_t chXpos, uint8_t chYpos, const uint8_t *pchBmp, 
 **/
 void ssd1306_initalization(void)
 {
+	/*
 	ssd1306_write_byte(0xAE, SSD1306_CMD);//--turn off oled panel
 	ssd1306_write_byte(0x00, SSD1306_CMD);//---set low column address
 	ssd1306_write_byte(0x10, SSD1306_CMD);//---set high column address
@@ -392,7 +402,35 @@ void ssd1306_initalization(void)
 	ssd1306_write_byte(0xA4, SSD1306_CMD);// Disable Entire Display On (0xa4/0xa5)
 	ssd1306_write_byte(0xA6, SSD1306_CMD);// Disable Inverse Display On (0xa6/a7) 
 	ssd1306_write_byte(0xAF, SSD1306_CMD);//--turn on oled panel
-	
+*/
+		ssd1306_write_byte(0xAE, SSD1306_CMD); //display off
+		ssd1306_write_byte(0x20, SSD1306_CMD); //Set Memory Addressing Mode
+		ssd1306_write_byte(0x10, SSD1306_CMD); //00,Horizontal Addressing Mode;01,Vertical Addressing Mode;10,Page Addressing Mode (RESET);11,Invalid
+		ssd1306_write_byte(0xB0, SSD1306_CMD); //Set Page Start Address for Page Addressing Mode,0-7
+		ssd1306_write_byte(0xC8, SSD1306_CMD); //Set COM Output Scan Direction
+		ssd1306_write_byte(0x00, SSD1306_CMD); //---set low column address
+		ssd1306_write_byte(0x10, SSD1306_CMD); //---set high column address
+		ssd1306_write_byte(0x40, SSD1306_CMD); //--set start line address
+		ssd1306_write_byte(0x81, SSD1306_CMD); //--set contrast control register
+		ssd1306_write_byte(0xFF, SSD1306_CMD);
+		ssd1306_write_byte(0xA1, SSD1306_CMD); //--set segment re-map 0 to 127
+		ssd1306_write_byte(0xA6, SSD1306_CMD); //--set normal display
+		ssd1306_write_byte(0xA8, SSD1306_CMD); //--set multiplex ratio(1 to 64)
+		ssd1306_write_byte(0x3F, SSD1306_CMD); //
+		ssd1306_write_byte(0xA4, SSD1306_CMD); //0xa4,Output follows RAM content;0xa5,Output ignores RAM content
+		ssd1306_write_byte(0xD3, SSD1306_CMD); //-set display offset
+		ssd1306_write_byte(0x00, SSD1306_CMD); //-not offset
+		ssd1306_write_byte(0xD5, SSD1306_CMD); //--set display clock divide ratio/oscillator frequency
+		ssd1306_write_byte(0xF0, SSD1306_CMD); //--set divide ratio
+		ssd1306_write_byte(0xD9, SSD1306_CMD); //--set pre-charge period
+		ssd1306_write_byte(0x22, SSD1306_CMD); //
+		ssd1306_write_byte(0xDA, SSD1306_CMD); //--set com pins hardware configuration
+		ssd1306_write_byte(0x12, SSD1306_CMD);
+		ssd1306_write_byte(0xDB, SSD1306_CMD); //--set vcomh
+		ssd1306_write_byte(0x20, SSD1306_CMD); //0x20,0.77xVcc
+		ssd1306_write_byte(0x8D, SSD1306_CMD); //--set DC-DC enable
+		ssd1306_write_byte(0x14, SSD1306_CMD); //
+		ssd1306_write_byte(0xAF, SSD1306_CMD); //--turn on SSD1306 panel
 	ssd1306_clear_screen(0x00);
 }
 

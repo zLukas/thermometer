@@ -3,15 +3,13 @@
 
 int oled_main(void)
 {
-	system_init();
+	ssd1306_initalization();
 	
 	ssd1306_clear_screen(0xFF);
-	delay_ms(1000);   //todo: replace this
+	//delay_ms(1000);   //todo: replace this
 	ssd1306_clear_screen(0x00);
-	ssd1306_display_string(18, 0, "1.3inch OLED", 16, 1);
-	ssd1306_display_string(0, 16, "This is a demo for SSD1306/1106 OLED moudle!", 16, 1);
 	ssd1306_refresh_gram();
-	delay_ms(1000);
+	//delay_ms(1000);
 	ssd1306_clear_screen(0x00);
 
 	ssd1306_draw_bitmap(0, 2, &c_chSingal816[0], 16, 8);
@@ -31,9 +29,7 @@ int oled_main(void)
 	ssd1306_draw_1616char(112,32, '7');
 	ssd1306_draw_bitmap(87, 16, &c_chBmp4016[0], 40, 16);
 
-	ssd1306_display_string(0, 52, "MUSIC", 12, 0);
-	ssd1306_display_string(52, 52, "MENU", 12, 0);
-	ssd1306_display_string(98, 52, "PHONE", 12, 0);
+
 	
 	ssd1306_refresh_gram();
 	while (1) {
