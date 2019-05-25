@@ -10,7 +10,6 @@
 #include <stdio.h>
 #include "defines.h"
 #include "SSD1306.h"
-#include "i2c.h"
 
 void oled_init(void);
 void oled_demo(void);

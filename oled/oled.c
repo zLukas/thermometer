@@ -10,15 +10,6 @@ char temperature[20];
 char humidity[20];
 char pressure[20];
 
-extern application_layer hardware;
-
-void delay_us(volatile uint16 time){
-	while(time != 0){
-		time--;
-	}
-}
-
-
 void oled_init(void){
 	delay_us(1000);
 	ssd1306_initalization();

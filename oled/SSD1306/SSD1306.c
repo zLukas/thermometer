@@ -57,14 +57,9 @@ static uint8_t s_chDispalyBuffer[128][8];
   * @retval None
 **/
 
-extern application_layer hardware;
+
 static void ssd1306_write_byte(uint8_t chData, uint8_t chCmd) 
 {
-	if (chCmd == SSD1306_DAT){
-		hardware.i2c_send(OLED_ADDR,SSD1306_DATA_REGISTER, chData);
-	}else{
-		hardware.i2c_send(OLED_ADDR,SSD1306_CMD_REGISTER, chData);
-	}
 /*
 	iic_start();
 	iic_write_byte(0x78);
@@ -373,7 +368,7 @@ void ssd1306_draw_bitmap(uint8_t chXpos, uint8_t chYpos, const uint8_t *pchBmp, 
 **/
 void ssd1306_initalization(void)
 {
-	/*
+
 	ssd1306_write_byte(0xAE, SSD1306_CMD);//--turn off oled panel
 	ssd1306_write_byte(0x00, SSD1306_CMD);//---set low column address
 	ssd1306_write_byte(0x10, SSD1306_CMD);//---set high column address
@@ -402,7 +397,7 @@ void ssd1306_initalization(void)
 	ssd1306_write_byte(0xA4, SSD1306_CMD);// Disable Entire Display On (0xa4/0xa5)
 	ssd1306_write_byte(0xA6, SSD1306_CMD);// Disable Inverse Display On (0xa6/a7) 
 	ssd1306_write_byte(0xAF, SSD1306_CMD);//--turn on oled panel
-*/
+	/*
 		ssd1306_write_byte(0xAE, SSD1306_CMD); //display off
 		ssd1306_write_byte(0x20, SSD1306_CMD); //Set Memory Addressing Mode
 		ssd1306_write_byte(0x10, SSD1306_CMD); //00,Horizontal Addressing Mode;01,Vertical Addressing Mode;10,Page Addressing Mode (RESET);11,Invalid
@@ -431,7 +426,8 @@ void ssd1306_initalization(void)
 		ssd1306_write_byte(0x8D, SSD1306_CMD); //--set DC-DC enable
 		ssd1306_write_byte(0x14, SSD1306_CMD); //
 		ssd1306_write_byte(0xAF, SSD1306_CMD); //--turn on SSD1306 panel
-	ssd1306_clear_screen(0x00);
+		ssd1306_clear_screen(0x00);
+	*/
 }
 
 /*-------------------------------END OF FILE-------------------------------*/

@@ -18,5 +18,8 @@
 #define int32       int32_t
 
 
+void delay_us(volatile uint32 time);
+
+
 
 #endif /* DEFINES_H_ */
