@@ -10,6 +10,6 @@
 
 #include <DAVE.h>
 #include "oled.h"
-
+#include "sensor.h"
 
 #endif /* MAIN_H_ */

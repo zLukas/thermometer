@@ -7,16 +7,19 @@
 
 
 #include "usic_spi.h"
+uint8 spi_init(void){
 
+}
 
-uint8 usic_spi_send_read(uint8* data_to_send, uint8 data_count){
-	SPI_MASTER_Transmit(&SPI_MASTER_0, data_to_send, data_count);
+uint8 usic_spi_send_read( uint8* data_to_send, uint8* data_to_read, uint8 data_send_count , uint8 data_read_count){
+	SPI_MASTER_SetMode(&SPI_MASTER_0, XMC_SPI_CH_MODE_STANDARD);
+	SPI_MASTER_Transmit(&SPI_MASTER_0, data_to_send, data_send_count);
 	while(SPI_MASTER_IsTxBusy(&SPI_MASTER_0));
-	SPI_MASTER_0.runtime->tx_busy =false;
 
-	uint8 data_received;
-	SPI_MASTER_Receive(&SPI_MASTER_0, &data_received, 1);
-	while(SPI_MASTER_IsRxBusy(&SPI_MASTER_0));
-	SPI_MASTER_0.runtime->rx_busy = false;
-	return data_received;
+	if( data_to_read != 0){
+		SPI_MASTER_Receive(&SPI_MASTER_0, data_to_read, data_read_count);
+		while(SPI_MASTER_IsRxBusy(&SPI_MASTER_0));
+	}
+	return (data_to_read == 0) ?  0 : 1;
+
 }

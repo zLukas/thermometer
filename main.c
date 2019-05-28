@@ -26,7 +26,9 @@ int main(void)
 	/* init all peripherials */
 	DAVE_Init();
 	oled_init();
-	oled_demo();
+	bme_init();
+
+
   /* Placeholder for user application code. The while loop below can be replaced with user application code. */
   while(1U)
   {

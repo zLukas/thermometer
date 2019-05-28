@@ -7,19 +7,26 @@
 
 #include "sensor.h"
 
-bme_bosh_api bme;
+bme_bosh_api bme_sensor;
 
 bme_bosh_api* get_bme_pointer(void){
-	return &bme;
+	return &bme_sensor;
+}
+void  bme_init(void){
+	bme_bosh_api* bme = get_bme_pointer();
+	bme->initialized= 0 ;
+	bme->bme_device.dev_id = 1;
+	bme->bme_device.write = spi_send;
+	bme->bme_device.read = spi_read;
+	bme->bme_device.delay_ms = delay_ms;
+
+	bme->initialized  = bme280_init(&(bme->bme_device));
 }
 
-void bme_init(void){
-	bme_bosh_api*  bme_ptr = get_bme_pointer();
-
-	bme_ptr->bme_device.dev_id = 1;
-	bme_ptr->bme_device.intf = BME280_SPI_INTF;
-	bme_ptr->bme_device.delay_ms =delay_us;
-	bme_ptr->bme_device.write = spi_send_read;
-	bme_ptr->bme_device.read = spi_send_read;
+void bme_read(void){
+	//todo Lukas: implement this
 }
 
+void bme_parse(void){
+	//todo Lukas: implement this
+}
