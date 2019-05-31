@@ -12,7 +12,7 @@
 
 void digital_gpio_init(void);
 void digital_set_pin(DIGITAL_IO_t* digital_io_pin );
-void digital_reset_pin(DIGITAL_IO_t* digital_io_pin );
+void digital_reset_pin(DIGITAL_IO_t* digital_io_pin);
 
 
 

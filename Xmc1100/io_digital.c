@@ -18,7 +18,7 @@ void digital_gpio_init(void){
 void digital_set_pin(DIGITAL_IO_t* digital_io_pin ){
  DIGITAL_IO_SetOutputHigh(digital_io_pin);
 }
-void digita_reset_pin(DIGITAL_IO_t* digital_io_pin ){
+void digital_reset_pin(DIGITAL_IO_t* digital_io_pin ){
 	DIGITAL_IO_SetOutputLow(digital_io_pin);
 }
 
