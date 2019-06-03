@@ -8,7 +8,6 @@
 
 #include "spi.h"
 
-
 spi_functions hardware_spi ={
 		.exchange_data= usic_spi_send_read,
 		.set_pin = digital_set_pin,

@@ -24,14 +24,15 @@
 int main(void)
 {
 	/* init all peripherials */
-	DAVE_Init();
+	 DAVE_STATUS_t status = DAVE_Init();
+	 spi_init();
+	delay_ms(500);
 	oled_init();
-	bme_init();
+	//bme_init();
 
-
+	oled_demo();
   /* Placeholder for user application code. The while loop below can be replaced with user application code. */
   while(1U)
   {
-
   }
 }

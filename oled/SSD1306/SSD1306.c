@@ -57,25 +57,35 @@ static uint8_t s_chDispalyBuffer[128][8];
   * @retval None
 **/
 
-
+extern spi_functions hardware_spi;
 static void ssd1306_write_byte(uint8_t chData, uint8_t chCmd) 
 {
-/*
-	iic_start();
-	iic_write_byte(0x78);
-	iic_wait_for_ack();
+	//enable chip
+	hardware_spi.reset_pin(&OLED_CS);
+
+	//DC low-COMMAND
+	//DC high -DATA
+	(chCmd == SSD1306_CMD) ? hardware_spi.reset_pin(&OLED_DC) : hardware_spi. set_pin(&OLED_DC) ;
+
+	//send data
+	hardware_spi.exchange_data(&chData,NULL,1,0);
+
+	//disable chip
+	hardware_spi.set_pin(&OLED_DC);
+	hardware_spi.set_pin(&OLED_CS);
+	/*
+	__SSD1306_CS_CLR();
+
 	if (chCmd) {
-		iic_write_byte(0x40);
-		iic_wait_for_ack();
+		__SSD1306_DC_SET();
 	} else {
-		iic_write_byte(0x00);
-		iic_wait_for_ack();
+		__SSD1306_DC_CLR();
 	}
-	iic_write_byte(chData);
-	iic_wait_for_ack();
+	__SSD1306_WRITE_BYTE(chData);
 	
-	iic_stop();
-*/
+	__SSD1306_DC_SET();
+	__SSD1306_CS_SET();
+	 */
 }   	  
 
 /**
@@ -369,6 +379,9 @@ void ssd1306_draw_bitmap(uint8_t chXpos, uint8_t chYpos, const uint8_t *pchBmp, 
 void ssd1306_initalization(void)
 {
 
+	hardware_spi.reset_pin(&OLED_RESET);
+	delay_us(100);
+	hardware_spi.set_pin(&OLED_RESET);
 	ssd1306_write_byte(0xAE, SSD1306_CMD);//--turn off oled panel
 	ssd1306_write_byte(0x00, SSD1306_CMD);//---set low column address
 	ssd1306_write_byte(0x10, SSD1306_CMD);//---set high column address
@@ -397,7 +410,9 @@ void ssd1306_initalization(void)
 	ssd1306_write_byte(0xA4, SSD1306_CMD);// Disable Entire Display On (0xa4/0xa5)
 	ssd1306_write_byte(0xA6, SSD1306_CMD);// Disable Inverse Display On (0xa6/a7) 
 	ssd1306_write_byte(0xAF, SSD1306_CMD);//--turn on oled panel
-	/*
+
+	ssd1306_clear_screen(0x00);
+/*
 		ssd1306_write_byte(0xAE, SSD1306_CMD); //display off
 		ssd1306_write_byte(0x20, SSD1306_CMD); //Set Memory Addressing Mode
 		ssd1306_write_byte(0x10, SSD1306_CMD); //00,Horizontal Addressing Mode;01,Vertical Addressing Mode;10,Page Addressing Mode (RESET);11,Invalid
@@ -427,7 +442,7 @@ void ssd1306_initalization(void)
 		ssd1306_write_byte(0x14, SSD1306_CMD); //
 		ssd1306_write_byte(0xAF, SSD1306_CMD); //--turn on SSD1306 panel
 		ssd1306_clear_screen(0x00);
-	*/
+		*/
 }
 
 /*-------------------------------END OF FILE-------------------------------*/

@@ -15,10 +15,10 @@ void digital_gpio_init(void){
 	DIGITAL_IO_Init(&SENSOR_CS);
 }
 
-void digital_set_pin(DIGITAL_IO_t* digital_io_pin ){
+void digital_set_pin(const DIGITAL_IO_t* digital_io_pin ){
  DIGITAL_IO_SetOutputHigh(digital_io_pin);
 }
-void digital_reset_pin(DIGITAL_IO_t* digital_io_pin ){
+void digital_reset_pin(const DIGITAL_IO_t* digital_io_pin ){
 	DIGITAL_IO_SetOutputLow(digital_io_pin);
 }
 

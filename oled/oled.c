@@ -11,12 +11,15 @@ char humidity[20];
 char pressure[20];
 
 void oled_init(void){
-	delay_us(1000);
 	ssd1306_initalization();
 }
 void oled_demo(void){
-	char table = "hello world";
-	ssd1306_display_string(2, 0, (uint8*) table, 11, 1);
+
+	ssd1306_clear_screen(0xFF);
+	delay_ms(1000);
+	ssd1306_clear_screen(0x00);
+	delay_ms(1000);
+	ssd1306_display_string(2, 0, "hello world", 12, 0);
 	ssd1306_refresh_gram();
 }
 

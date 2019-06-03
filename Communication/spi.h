@@ -11,9 +11,6 @@
 #include <stdlib.h>
 #include <malloc.h>
 
-
-#define PIN_TYPEDEF   DIGITAL_IO_t
-
 typedef struct{
 	uint8 (*exchange_data)(uint8*, uint8*,uint8, uint8);
 	void (*set_pin)(DIGITAL_IO_t*);
