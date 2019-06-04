@@ -19,14 +19,10 @@ uint8 usic_spi_send_read( uint8* data_to_send, uint8* data_to_read, uint8 data_s
 	if(SPI_MASTER_Transmit(&SPI_MASTER_0, data_to_send, data_send_count)== SPI_MASTER_STATUS_SUCCESS){
 		//wait for transmit
 		while(SPI_MASTER_IsTxBusy(&SPI_MASTER_0));
-		if(data_to_read == 0){
+		if(data_read_count == 0){
 			return 0;
 		}
-	}else{
-		return 1;
 	}
-
-	if(data_to_read != 0){
 		//wait for receive
 		if(SPI_MASTER_Receive(&SPI_MASTER_0, data_to_read, data_read_count)== SPI_MASTER_STATUS_SUCCESS){
 			while(SPI_MASTER_IsRxBusy(&SPI_MASTER_0));
@@ -34,6 +30,5 @@ uint8 usic_spi_send_read( uint8* data_to_send, uint8* data_to_read, uint8 data_s
 		}else{
 			return 1;
 		}
-	}
-
 }
+

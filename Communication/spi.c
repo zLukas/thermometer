@@ -14,17 +14,17 @@ spi_functions hardware_spi ={
 		.reset_pin =digital_reset_pin
 };
 void write_oled_dc_pin(uint8 state){
-	(state == SET) ? hardware_spi.set(&OLED_DC): hardware_spi.reset_pin(&OLED_DC);
+	(state == PIN_SET) ? hardware_spi.set_pin(&OLED_DC): hardware_spi.reset_pin(&OLED_DC);
 }
 void write_oled_cs_pin(uint8 state){
-	(state == SET) ? hardware_spi.set(&OLED_CS): hardware_spi.reset_pin(&OLED_CS);
+	(state == PIN_SET) ? hardware_spi.set_pin(&OLED_CS): hardware_spi.reset_pin(&OLED_CS);
 }
 
 void write_oled_reset_pin(uint8 state){
-	(state == SET) ? hardware_spi.set(&OLED_RESET): hardware_spi.reset_pin(&OLED_RESET);
+	(state == PIN_SET) ? hardware_spi.set_pin(&OLED_RESET): hardware_spi.reset_pin(&OLED_RESET);
 }
 void write_sensor_csb_pin_state(uint8 state){
-	(state == SET) ? hardware_spi.set(&SENSOR_CS): hardware_spi.reset_pin(&SENSOR_CS);
+	(state == PIN_SET) ? hardware_spi.set_pin(&SENSOR_CS): hardware_spi.reset_pin(&SENSOR_CS);
 }
 
 int8 spi_send(uint8 register_address, uint8* data_to_exchange, uint8 data_send_count){
