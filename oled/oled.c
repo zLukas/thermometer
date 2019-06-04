@@ -19,18 +19,18 @@ void oled_demo(void){
 	delay_ms(1000);
 	ssd1306_clear_screen(0x00);
 	delay_ms(1000);
-	ssd1306_display_string(2, 0, "hello world", 12, 0);
-	ssd1306_refresh_gram();
+oled_write_lines((float[]){26.1,1000, 50,5 } );
 }
 
-void oled_write_lines(char* data){
-	sprintf(temperature,"temperatura  %.1f C", data[0]);
-	sprintf(humidity,"wilgotnosc  %.1f %", data[1]);
-	sprintf(pressure,"cisnienie  %.1f hPa", data[3]);
+void oled_write_lines(float* data){
 
-	ssd1306_display_string(2, 0, (uint8 *)temperature, 20, 1);
-	ssd1306_display_string(2, 16, (uint8 *)humidity, 20, 1);
-	ssd1306_display_string(2, 32, (uint8 *)pressure, 20, 1);
+	snprintf(temperature, 15, "T %.2f      C", data[0]);
+	snprintf(pressure, 15,    "P %.0f     hPa", data[1]);
+	snprintf(humidity, 15,    "H %.2f     %%", data[2]);
+	ssd1306_display_string(5, 16, (uint8 *)temperature, 16, 1);
+	ssd1306_display_string(5, 32, (uint8 *)pressure, 16, 1);
+	ssd1306_display_string(5, 48, (uint8 *)humidity, 16, 1);
+
 	ssd1306_refresh_gram();
 }
 
