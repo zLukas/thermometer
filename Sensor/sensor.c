@@ -19,7 +19,7 @@ void  bme_init(void){
 	bme->bme_device.write = spi_send;
 	bme->bme_device.read = spi_read;
 	bme->bme_device.delay_ms = delay_ms;
-
+	//todo Lukas: set CSB constantly to the ground
 	bme->initialized  = bme280_init(&(bme->bme_device));
 }
 
