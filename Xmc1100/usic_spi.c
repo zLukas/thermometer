@@ -16,19 +16,15 @@ uint8 spi_init(void){
 
 uint8 usic_spi_send_read( uint8* data_to_send, uint8* data_to_read, uint8 data_send_count , uint8 data_read_count){
 
-	if(SPI_MASTER_Transmit(&SPI_MASTER_0, data_to_send, data_send_count)== SPI_MASTER_STATUS_SUCCESS){
-		//wait for transmit
-		while(SPI_MASTER_IsTxBusy(&SPI_MASTER_0));
-		 SPI_MASTER_ClearFlag(&SPI_MASTER_0,XMC_SPI_CH_STATUS_FLAG_ALTERNATIVE_RECEIVE_INDICATION);
-		 SPI_MASTER_ClearFlag(&SPI_MASTER_0,XMC_SPI_CH_STATUS_FLAG_RECEIVE_INDICATION);
-		if(data_read_count == 0){
-			return 0;
-		}
+	SPI_MASTER_Transmit(&SPI_MASTER_0, data_to_send, data_send_count);
+	while(SPI_MASTER_IsTxBusy(&SPI_MASTER_0));
+	if(data_read_count !=0){
+		//wait for receive
+		//this delay is demanded, otherviwe it not read anything
+		delay_ms(50);
+		SPI_MASTER_Receive(&SPI_MASTER_0, data_to_read, data_read_count);
+		while(SPI_MASTER_IsRxBusy(&SPI_MASTER_0));
 	}
-	//wait for receive0
-	SPI_MASTER_Receive(&SPI_MASTER_0, data_to_read, data_read_count);
-	SPI_MASTER_Receive(&SPI_MASTER_0, data_to_read, data_read_count);
-	while(SPI_MASTER_IsRxBusy(&SPI_MASTER_0));
 	return 0;
 
 }

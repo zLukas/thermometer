@@ -29,7 +29,8 @@ int main(void)
 	delay_ms(500);
 	oled_init();
 	bme_init();
-
+	bme_read();
+	bme_bosh_api* bme = get_bme_pointer();
 	oled_demo();
   /* Placeholder for user application code. The while loop below can be replaced with user application code. */
   while(1U)

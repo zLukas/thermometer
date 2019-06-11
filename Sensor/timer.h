@@ -10,6 +10,6 @@
 #include "defines.h"
 
 
-void delay_ms(volatile uint16 time);
+void delay_ms(volatile uint32 time);
 
 #endif /* SENSOR_TIMER_H_ */

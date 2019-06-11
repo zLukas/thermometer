@@ -1,3 +1,4 @@
 28.04.2019 niedziela 21:00
 
-1. dodaæ obs³ugê I/O dla D/C , podpi¹c RES i CS do masy
+1.bme and OLED have differrent clock settings, handle this setting change.
+

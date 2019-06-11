@@ -12,6 +12,10 @@
 #include "bme280.h"
 #include "spi.h"
 #include "timer.h"
+
+
+#define BME_RESET_ADDRESS_VALUE 0xB6
+
 /* sensor handlng using bosh API*/
 typedef struct{
 	struct bme280_dev bme_device;
@@ -21,7 +25,7 @@ typedef struct{
 	int8 initialized;
 }bme_bosh_api;
 
-void  bme_init(void);
-
-
+void bme_init(void);
+void bme_read(void);
+bme_bosh_api* get_bme_pointer(void);
 #endif /* SENSOR_SENSOR_H_ */

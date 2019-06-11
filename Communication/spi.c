@@ -44,6 +44,7 @@ int8 spi_send(uint8 register_address, uint8* data_to_exchange, uint8 data_send_c
 }
 
 int8 spi_read(uint8 register_address, uint8* data_to_exchange, uint8 data_count){
+
 	hardware_spi.reset_pin(&SENSOR_CS);
 	delay_us(2);
 	 //exchange_data(*data_to_send, *data_to_read, data_send_count, data_read_count);
