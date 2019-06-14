@@ -7,11 +7,34 @@
 
 
 #include "usic_spi.h"
-uint8 spi_init(void){
+/*
+ * oled needs transmit on rising edge,
+ * DAVE CE allows to configure clock in 2 ways:
+ *
+ * transmit/receive -> falling/rising edge
+ * transmit/receive -> rising/falling edge
+ *
+ *  on first configuration oled works proper but bme miss one received bit ,
+ *  on secong bme works proper but oled not at all
+ */
+extern SPI_MASTER_t bme_spi; // configuration: transmit on falling edge, receive on rising
+extern SPI_MASTER_t oled_spi;// configuration: transmit on rising edge, receive on falling
+
+void spi_init(void){
 	SPI_MASTER_Init(&SPI_MASTER_0);
 	SPI_MASTER_SetMode(&SPI_MASTER_0, XMC_SPI_CH_MODE_STANDARD);
-	SPI_MASTER_SetBaudRate(&SPI_MASTER_0,10000);
+	SPI_MASTER_SetBaudRate(&SPI_MASTER_0,16000);
+}
 
+
+void spi_bme_init(void){
+	SPI_MASTER_0 = bme_spi;
+	spi_init();
+}
+
+void spi_oled_init(void){
+	SPI_MASTER_0 = oled_spi;
+	spi_init();
 }
 
 uint8 usic_spi_send_read( uint8* data_to_send, uint8* data_to_read, uint8 data_send_count , uint8 data_read_count){

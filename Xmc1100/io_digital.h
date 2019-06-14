@@ -7,7 +7,7 @@
 
 #ifndef XMC1100_IO_DIGITAL_H_
 #define XMC1100_IO_DIGITAL_H_
-#include <DAVE.h>
+#include <digital_io.h>
 #include"defines.h"
 
 void digital_gpio_init(void);

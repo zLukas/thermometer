@@ -8,7 +8,6 @@
 #ifndef MAIN_H_
 #define MAIN_H_
 
-#include <DAVE.h>
 #include "oled.h"
 #include "timer.h"
 

@@ -7,7 +7,7 @@
 
 #ifndef DEFINES_H_
 #define DEFINES_H_
-#include <DAVE.h>
+#include "xmc_common.h"
 
 
 #define uint8 		uint8_t
