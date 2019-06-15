@@ -16,13 +16,23 @@
 
 #define BME_RESET_ADDRESS_VALUE 0xB6
 
+#define OSRS_TEMPERATURE  	    0x04   //100
+#define OSRS_PRESSURE     		0x02   //010
+#define OSRS_HUMIDITY			0x01   //001
+#define BME_NORMAL_MODE			0x03   //11
+#define BME_FORCED_MODE			0x01
 /* sensor handlng using bosh API*/
+typedef struct{
+	uint8 oversmpling;
+	uint8 value;
+}bme280_oversamplings;
 typedef struct{
 	struct bme280_dev bme_device;
 	struct bme280_settings bme_settings;
 	struct bme280_data bme_data;
 	struct bme280_uncomp_data bme_raw_data;
 	int8 initialized;
+	uint16 measurement_time;
 }bme_bosh_api;
 
 void bme_init(void);

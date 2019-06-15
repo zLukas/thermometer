@@ -26,17 +26,14 @@ int main(void)
 	/* init all peripherials */
 	digital_gpio_init();
 	delay_ms(500);
-	spi_oled_init();
 	oled_init();
-	spi_bme_init();
 	bme_init();
-	bme_read();
-	bme_bosh_api* bme = get_bme_pointer();
 
-	spi_oled_init();
-	oled_demo();
   /* Placeholder for user application code. The while loop below can be replaced with user application code. */
   while(1U)
   {
+	  bme_read();
+	  oled_show_weather();
+	  delay_ms(1000);
   }
 }

@@ -15,5 +15,5 @@
 
 void oled_init(void);
 void oled_demo(void);
-void oled_write_lines(float* data);
+void oled_show_weather(void);
 #endif /* OLED_OLED_H_ */
