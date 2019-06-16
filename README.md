@@ -15,5 +15,3 @@ For both,  oled and sensor producents APIs were used:
 
 Each of this APIs was slightly changed.
 
-Components connecion shematic(4-wire SPI):
-![Alt text](https://github.com/zLukas/termometer/blob/develop/electric.PNG " Components connection, 4-wire SPI")
