@@ -28,11 +28,11 @@ typedef struct{
 }bme280_oversamplings;
 typedef struct{
 	struct bme280_dev bme_device;
-	struct bme280_settings bme_settings;
 	struct bme280_data bme_data;
 	struct bme280_uncomp_data bme_raw_data;
 	int8 initialized;
 	uint16 measurement_time;
+	int8 crc_test_status;
 }bme_bosh_api;
 
 void bme_init(void);

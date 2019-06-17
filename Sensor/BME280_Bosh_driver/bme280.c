@@ -419,7 +419,7 @@ int8_t bme280_get_regs(uint8_t reg_addr, uint8_t *reg_data, uint16_t len, const 
         /* If interface selected is SPI */
         if (dev->intf != BME280_I2C_INTF)
         {
-            reg_addr = reg_addr | 0x80;
+            reg_addr = reg_addr | (1<<8);
         }
 
         /* Read the data  */
@@ -466,7 +466,7 @@ int8_t bme280_set_regs(uint8_t *reg_addr, const uint8_t *reg_data, uint8_t len, 
             {
                 for (reg_addr_cnt = 0; reg_addr_cnt < len; reg_addr_cnt++)
                 {
-                    reg_addr[reg_addr_cnt] = reg_addr[reg_addr_cnt] & 0x7F;
+                    reg_addr[reg_addr_cnt] = reg_addr[reg_addr_cnt] & (0<<8);
                 }
             }
 
@@ -664,7 +664,7 @@ int8_t bme280_get_sensor_data(uint8_t sensor_comp, struct bme280_data *comp_data
     /* Array to store the pressure, temperature and humidity data read from
      * the sensor
      */
-    uint8_t reg_data[BME280_P_T_H_DATA_LEN] = { 0 };
+    static uint8_t reg_data[BME280_P_T_H_DATA_LEN] = { 0 };
     struct bme280_uncomp_data uncomp_data = { 0 };
 
     /* Check for null pointer in the device structure*/
@@ -672,7 +672,15 @@ int8_t bme280_get_sensor_data(uint8_t sensor_comp, struct bme280_data *comp_data
     if ((rslt == BME280_OK) && (comp_data != NULL))
     {
         /* Read the pressure and temperature data from the sensor */
-        rslt = bme280_get_regs(BME280_DATA_ADDR, reg_data, BME280_P_T_H_DATA_LEN, dev);
+        //rslt = bme280_get_regs(BME280_DATA_ADDR, reg_data, BME280_P_T_H_DATA_LEN, dev);
+    	rslt = bme280_get_regs(0xF7, &reg_data[0], 1, dev);
+    	rslt = bme280_get_regs(0xF8, &reg_data[1], 1, dev);
+    	rslt = bme280_get_regs(0xF9, &reg_data[2], 1, dev);
+    	rslt = bme280_get_regs(0xFA, &reg_data[3], 1, dev);
+    	rslt = bme280_get_regs(0xFB, &reg_data[4], 1, dev);
+    	rslt = bme280_get_regs(0xFC, &reg_data[5], 1, dev);
+    	rslt = bme280_get_regs(0xFD, &reg_data[6], 1, dev);
+    	rslt = bme280_get_regs(0xFE, &reg_data[7], 1, dev);
         if (rslt == BME280_OK)
         {
             /* Parse the read data from the sensor */
