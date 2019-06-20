@@ -28,12 +28,17 @@ int main(void)
 	delay_ms(500);
 	oled_init();
 	bme_init();
-
+	delay_ms(1000);
+	/*first read show dump data */
+	bme_read();
   /* Placeholder for user application code. The while loop below can be replaced with user application code. */
   while(1U)
   {
-	  bme_read();
-	  oled_show_weather();
-	  delay_ms(1000);
+	bme_read();
+	oled_show_weather();
+	//todo : refactor timer
+	for(uint8 i = 0; i < 60; i++){
+		delay_ms(1000);
+	}
   }
 }

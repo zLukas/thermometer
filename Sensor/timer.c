@@ -6,7 +6,7 @@
  */
 # include "timer.h"
 void delay_ms(volatile uint32 time){
-	time *= time;
+	time *=time;
 	while(time){
 		time--;
 	}
