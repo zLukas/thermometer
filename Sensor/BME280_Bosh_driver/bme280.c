@@ -466,7 +466,7 @@ int8_t bme280_set_regs(uint8_t *reg_addr, const uint8_t *reg_data, uint8_t len, 
             {
                 for (reg_addr_cnt = 0; reg_addr_cnt < len; reg_addr_cnt++)
                 {
-                    reg_addr[reg_addr_cnt] = reg_addr[reg_addr_cnt] & (0<<8);
+                    reg_addr[reg_addr_cnt] = reg_addr[reg_addr_cnt] & 0x7F;
                 }
             }
 
