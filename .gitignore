@@ -1,6 +1,6 @@
 !.gitignore
 
-
+/Dave/Model
 /Debug
 /Startup
 /.settings

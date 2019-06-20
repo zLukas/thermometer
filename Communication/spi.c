@@ -23,7 +23,7 @@ int8 spi_send(uint8 register_address, uint8* data_to_exchange, uint8 data_send_c
 		combined_data[i] = data_to_exchange[i-1];
 	}
 	 //exchange_data(*data_to_send, *data_to_read, data_send_count, data_read_count);
-	uint8 result = hardware_spi.exchange_data(combined_data, NULL, data_send_count, 0);
+	uint8 result = hardware_spi.exchange_data(combined_data, NULL, data_send_count + 1, 0);
 	free(combined_data);
 	delay_us(2);
 	hardware_spi.set_pin(&SENSOR_CS);
