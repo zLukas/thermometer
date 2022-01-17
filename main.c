@@ -8,7 +8,7 @@
 
 
 
-#include <DAVE.h>                 //Declarations from DAVE Code Generation (includes SFR declaration)
+#include "main.h"                //Declarations from DAVE Code Generation (includes SFR declaration)
 
 /**
 
@@ -20,26 +20,25 @@
  * code.
  */
 
+
 int main(void)
 {
-  DAVE_STATUS_t status;
-
-  status = DAVE_Init();           /* Initialization of DAVE APPs  */
-
-  if(status != DAVE_STATUS_SUCCESS)
-  {
-    /* Placeholder for error handler code. The while loop below can be replaced with an user error handler. */
-    XMC_DEBUG("DAVE APPs initialization failed\n");
-
-    while(1U)
-    {
-
-    }
-  }
-
+	/* init all peripherials */
+	digital_gpio_init();
+	delay_ms(500);
+	oled_init();
+	bme_init();
+	delay_ms(1000);
+	/*first read show dump data */
+	bme_read();
   /* Placeholder for user application code. The while loop below can be replaced with user application code. */
   while(1U)
   {
-
+	bme_read();
+	oled_show_weather();
+	//todo : refactor timer
+	for(uint8 i = 0; i < 60; i++){
+		delay_ms(1000);
+	}
   }
 }

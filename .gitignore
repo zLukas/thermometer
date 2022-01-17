@@ -1,8 +1,9 @@
 !.gitignore
 
-/Dave
+/Dave/Model
 /Debug
 /Startup
 /.settings
 /Libraries
 *.ld
+solver.log
