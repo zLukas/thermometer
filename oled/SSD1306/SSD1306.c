@@ -73,19 +73,7 @@ static void ssd1306_write_byte(uint8_t chData, uint8_t chCmd)
 	//disable chip
 	hardware_spi.set_pin(&OLED_DC);
 	hardware_spi.set_pin(&OLED_CS);
-	/*
-	__SSD1306_CS_CLR();
 
-	if (chCmd) {
-		__SSD1306_DC_SET();
-	} else {
-		__SSD1306_DC_CLR();
-	}
-	__SSD1306_WRITE_BYTE(chData);
-	
-	__SSD1306_DC_SET();
-	__SSD1306_CS_SET();
-	 */
 }   	  
 
 /**

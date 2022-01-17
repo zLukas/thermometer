@@ -1,4 +1,2 @@
 28.04.2019 niedziela 21:00
-
-1.bme and OLED have differrent clock settings, handle this setting change.
-
+release/0.2 -> use timer module instead of dealy_ms
